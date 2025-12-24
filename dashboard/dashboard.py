@@ -7,26 +7,23 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# Store detection events
 alerts = []
 
-# Count detections
 stats = {
     'normal': 0,
     'attack': 0
 }
 
-# Home page
 @app.route('/')
 def index():
-    # Create pie chart
+
     fig, ax = plt.subplots(figsize=(6, 4))
     labels = ['Normal', 'Attack']
     values = [stats['normal'], stats['attack']]
     colors = ['#2ecc71', '#e74c3c']
     
     if sum(values) == 0:
-        values = [1, 1]  # Show equal if no data
+        values = [1, 1] 
         labels = ['', '']
         ax.pie(values, labels=labels, colors=['#cccccc', '#cccccc'], textprops={'color': 'w'})
         plt.legend(labels=['No data yet'], loc='center')
@@ -35,7 +32,6 @@ def index():
 
     plt.title("Traffic Detection Summary", color='#2c3e50')
 
-    # Save plot to bytes
     img = io.BytesIO()
     plt.savefig(img, format='png', bbox_inches='tight', facecolor='#f8f9fa')
     img.seek(0)
@@ -83,8 +79,8 @@ def index():
     </html>
     '''
     return render_template_string(html, alerts=alerts)
+    
 
-# Route to add normal device
 @app.route('/normal/<ip>/<name>')
 def add_normal(ip, name):
     global alerts, stats
@@ -98,7 +94,6 @@ def add_normal(ip, name):
     stats['normal'] += 1
     return "OK", 200
 
-# Route to add attack
 @app.route('/attack/<ip>/<atype>')
 def add_attack(ip, atype):
     global alerts, stats
@@ -119,7 +114,6 @@ if __name__ == '__main__':
     def run_flask():
         app.run(port=5000, debug=False, use_reloader=False)
 
-    # Start Flask in background thread
     threading.Thread(target=run_flask, daemon=True).start()
 
     print("🌍 Dashboard started at http://localhost:5000")
