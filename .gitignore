@@ -1,0 +1,45 @@
+# Python generated files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Virtual environment
+venv/
+env/
+virtualenv/
+.venv/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# OS generated files
+.DS_Store
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# Local config files (if any)
+.env
+config.py
+secrets.py
+
+# Large datasets (optional – if you don’t want to upload them)
+RT_IOT2022.csv
+data.csv
